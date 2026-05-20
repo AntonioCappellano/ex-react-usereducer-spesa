@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="lista-prodotti"></div>
+    <script type="text/babel">
+      const products = [
+        { name: "Mela", price: 0.5 },
+        { name: "Pane", price: 1.2 },
+        { name: "Latte", price: 1.0 },
+        { name: "Pasta", price: 0.7 },
+      ];
+      function Prodotti() {
+        return (
+          <>
+            <ul>
+              {products.map((p, index) => (
+                <li key={index}>
+                  <h2>{p.name}</h2>
+                  <p>Prezzo: {p.price}</p>
+                </li>
+              ))}
+            </ul>
+          </>
+        );
+      }
+      const { createRoot } = ReactDOM;
+      const listaProdotti = document.querySelector(".lista-prodotti");
+      const root = createRoot(listaProdotti);
+      root.render(<Prodotti />);
+    </script>
+  </body>
+</html>
