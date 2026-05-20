@@ -42,7 +42,7 @@
             setAddedProducts(newProduct);
           }
         }
-        
+
         function removeFromCart(prodotto) {
           const removeProduct = addedProducts.filter(
             (p) => p.name !== prodotto.name,
@@ -54,6 +54,16 @@
           (tot, p) => tot + p.price * p.quantity,
           0,
         );
+
+        function updateProductQuantity(prodotto, newQuantity) {
+          const parsedQuantity = parseInt(newQuantity);
+          if (!parsedQuantity || parsedQuantity < 1) return;
+          const updateQuantity = addedProducts.map((p) =>
+            p.name === prodotto.name ? { ...p, quantity: parsedQuantity } : p,
+          );
+
+          setAddedProducts(updateQuantity);
+        }
 
         return (
           <>
@@ -75,7 +85,13 @@
                     <li key={index}>
                       <h3>{p.name}</h3>
                       <p>Prezzo: {p.price}</p>
-                      <p>Quantità: {p.quantity}</p>
+                      <input
+                        type="number"
+                        value={p.quantity}
+                        onChange={(e) =>
+                          updateProductQuantity(p, e.target.value)
+                        }
+                      />
                       <button onClick={() => removeFromCart(p)}>
                         Rimuovi dal carrello
                       </button>
